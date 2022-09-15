@@ -9,8 +9,7 @@ namespace _Game.Controllers
     {
         #region Variables
 
-        [SerializeField] private PathCreator _path;
-        [SerializeField] private EndOfPathInstruction _endOfPathInstruction = EndOfPathInstruction.Stop;
+        [SerializeField] private Vector3 _moveDirection;
         [SerializeField] private float _speed = 5f;
 
         [SerializeField] [Tooltip("How fast full speed is achieved")] [Range(1f, 10f)]
@@ -27,7 +26,7 @@ namespace _Game.Controllers
         private void Start()
         {
            GameManager.Instance.OnLevelStart += GameManager_OnLevelStart;
-            _path.pathUpdated += OnPathChanged;
+         
         }
 
         private void Update()
@@ -38,7 +37,7 @@ namespace _Game.Controllers
         private void OnDestroy()
         {
             if (GameManager.Instance) GameManager.Instance.OnLevelStart -= GameManager_OnLevelStart;
-            if (_path) _path.pathUpdated -= OnPathChanged;
+            
         }
 
         #endregion
@@ -49,29 +48,15 @@ namespace _Game.Controllers
 
         private void FollowPath()
         {
-            if (_currentSpeed < _speed)
-            {
-                _currentSpeed += _speedMultiplier * Time.deltaTime;
-                _currentSpeed = Mathf.Clamp(_currentSpeed, 0f, _speed);
-            }
-
-            _distanceTravelled += _currentSpeed * Time.deltaTime;
-            transform.position = _path.path.GetPointAtDistance(_distanceTravelled, _endOfPathInstruction);
-            transform.rotation = _path.path.GetRotationAtDistance(_distanceTravelled, _endOfPathInstruction);
+            transform.Translate(_moveDirection * Time.deltaTime * _speed);
         }
 
-        private void OnPathChanged() => _distanceTravelled = _path.path.GetClosestDistanceAlongPath(transform.position);
+      
 
-#if UNITY_EDITOR
-        public void FindPathFromScene() => _path = FindObjectOfType<PathCreator>();
-        
-        [Sirenix.OdinInspector.Button, Sirenix.OdinInspector.PropertySpace]
-#endif
+
         public void StartFollowing() => _canFollow = true;
         
-#if UNITY_EDITOR
-        [Sirenix.OdinInspector.Button]
-#endif
+
         public void StopFollowing() => _canFollow = false;
         
         #endregion
