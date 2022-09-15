@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using TMPro;
 public class Portal : MonoBehaviour
 {
     public enum SpawnerState
@@ -9,10 +10,10 @@ public class Portal : MonoBehaviour
         additive,
         multiplier
     }
-
+    public TextMeshProUGUI sizeText;
     public SpawnerState currentMathState;
     private PlayerCreator playerCreator;
-    private TextMesh sizeText;
+
     private MeshRenderer meshRenderer;
     public int size;
     public static bool isGateActive = true;
@@ -20,7 +21,7 @@ public class Portal : MonoBehaviour
     private void Awake()
     {
         playerCreator = GameObject.FindGameObjectWithTag("PlayerBase").GetComponent<PlayerCreator>();
-        sizeText = GetComponentInChildren<TextMesh>();
+        sizeText = GetComponentInChildren<TextMeshProUGUI>();
         meshRenderer = GetComponent<MeshRenderer>();
     }
 
@@ -41,7 +42,8 @@ public class Portal : MonoBehaviour
     {
         if (isGateActive)
         {
-            meshRenderer.enabled = false;
+
+            DisableGate();
             gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
             StartCoroutine(GateActive());
 
@@ -57,7 +59,11 @@ public class Portal : MonoBehaviour
             }
         }
     }
-
+    void DisableGate()
+    {
+        meshRenderer.enabled = false;
+        sizeText.gameObject.SetActive(false);
+    }
     public IEnumerator GateActive()
     {
         isGateActive = false;
