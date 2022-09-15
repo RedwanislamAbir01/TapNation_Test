@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
 
 public class PlayerCreator : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerCreator : MonoBehaviour
 
     private void Start()
     {
+        _Game.Managers.GameManager.Instance.OnLevelEnd += MoveToEnd;
         players.Add(GetComponentInChildren<Player>().gameObject);
     }
     private void Update()
@@ -34,5 +36,14 @@ public class PlayerCreator : MonoBehaviour
         Vector3 newPos = transform.position + pos;
         newPos.y = 0.5f;
         return newPos;
+    }
+
+    void MoveToEnd()
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            players[i].transform.parent = FindObjectOfType<FinishLine>()._container.transform;
+              players[i].transform.DOLocalMove(FindObjectOfType<FinishLine>().EndPoses[i].transform.localPosition, .05f*i).SetDelay(.05f*i);
+        } 
     }
 }

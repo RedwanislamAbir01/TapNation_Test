@@ -17,10 +17,12 @@ public class Player : MonoBehaviour
     {
         playerCreator = GameObject.FindGameObjectWithTag("PlayerBase").GetComponent<PlayerCreator>();
         Center = GameObject.FindGameObjectWithTag("PlayerBase").transform;
+       
     }
 
     void Start()
     {
+        GameManager.Instance.OnLevelEnd += HoldOffFalse;
         _anim = GetComponent<Animator>();
         PlayAimAnim();
     }
@@ -34,7 +36,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void PlayAimAnim() => _anim.SetTrigger(Shoot);
 
-
+    void HoldOffFalse() {
+        GetComponent<Collider>().isTrigger = true;
+        playerCreator.holdoff = true;
+    
+    }
 
 
 
