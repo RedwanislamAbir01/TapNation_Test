@@ -52,7 +52,7 @@ namespace _Game.Controllers
             if (other.gameObject.CompareTag("Finish"))
             {
                 GameManager.Instance.LevelEnd();
-                print("--");
+                _canControl = false;
             }
         }
 

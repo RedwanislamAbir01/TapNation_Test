@@ -10,6 +10,10 @@ public class PlayerCreator : MonoBehaviour
     public List<GameObject> players = new List<GameObject>();
     [SerializeField] public bool holdoff = false;
 
+    private void Start()
+    {
+        players.Add(GetComponentInChildren<Player>().gameObject);
+    }
     private void Update()
     {
         playerCountText.text = players.Count.ToString();
