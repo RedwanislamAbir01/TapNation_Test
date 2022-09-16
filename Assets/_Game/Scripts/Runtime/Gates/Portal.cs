@@ -38,31 +38,12 @@ public class Portal : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (isGateActive)
-        {
 
-            DisableGate();
-            gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
-            StartCoroutine(GateActive());
-
-            switch (currentMathState)
-            {
-                case SpawnerState.additive:
-                    playerCreator.SpawnPlayer(size);
-                    break;
-                case SpawnerState.multiplier:
-                    int multiplierSize = playerCreator.players.Count * size - playerCreator.players.Count;
-                    playerCreator.SpawnPlayer(multiplierSize);
-                    break;
-            }
-        }
-    }
-    void DisableGate()
+   public void DisableGate()
     {
         meshRenderer.enabled = false;
         sizeText.gameObject.SetActive(false);
+        gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
     }
     public IEnumerator GateActive()
     {

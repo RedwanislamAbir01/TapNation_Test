@@ -15,8 +15,8 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        playerCreator = GameObject.FindGameObjectWithTag("PlayerBase").GetComponent<PlayerCreator>();
-        Center = GameObject.FindGameObjectWithTag("PlayerBase").transform;
+        playerCreator = GetComponentInParent<PlayerCreator>();
+        Center = playerCreator.transform;
        
     }
 
@@ -39,7 +39,6 @@ public class Player : MonoBehaviour
     void HoldOffFalse() {
         GetComponent<Collider>().isTrigger = true;
         playerCreator.holdoff = true;
-    
     }
 
 

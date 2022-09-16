@@ -14,8 +14,14 @@ public class PlayerCreator : MonoBehaviour
     private void Start()
     {
         _Game.Managers.GameManager.Instance.OnLevelEnd += MoveToEnd;
+        CountInitialPlayers();
+    }
+
+    private void CountInitialPlayers()
+    {
         players.Add(GetComponentInChildren<Player>().gameObject);
     }
+
     private void Update()
     {
         playerCountText.text = players.Count.ToString();
@@ -50,4 +56,25 @@ public class PlayerCreator : MonoBehaviour
                  
         } 
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.GetComponent<Portal>())
+        {
+            Portal _portal = other.gameObject.GetComponent<Portal>();
+            _portal.DisableGate();
+
+            switch (_portal.currentMathState)
+            {
+                case Portal.SpawnerState.additive:
+                    SpawnPlayer(_portal.size);
+                    break;
+                case Portal.SpawnerState.multiplier:
+                    int multiplierSize = players.Count * _portal.size - players.Count;
+                   SpawnPlayer(multiplierSize);
+                    break;
+            }
+        }
+    }
+
 }
