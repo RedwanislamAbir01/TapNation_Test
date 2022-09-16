@@ -12,9 +12,11 @@ GameObject:
   - component: {fileID: 5036777078743306669}
   - component: {fileID: 2784446944673972190}
   - component: {fileID: -3441712518229989674}
-  m_Layer: 0
+  - component: {fileID: 6124521989652156257}
+  - component: {fileID: 5607127000992470008}
+  m_Layer: 6
   m_Name: BulletSmallBlue
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2365,6 +2367,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 36
+--- !u!136 &6124521989652156257
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743154348889476204}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.10858601
+  m_Height: 1.2438889
+  m_Direction: 2
+  m_Center: {x: 0, y: 0.012370884, z: -0.6668205}
+--- !u!54 &5607127000992470008
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743154348889476204}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &3311324793870844465
 GameObject:
   m_ObjectHideFlags: 0
@@ -2376,7 +2408,7 @@ GameObject:
   - component: {fileID: 2161797620566371114}
   - component: {fileID: 9105781319247639085}
   - component: {fileID: 1675549846572514188}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SparkTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4716,7 +4748,7 @@ GameObject:
   - component: {fileID: 8129754312729777076}
   - component: {fileID: 427883802140035473}
   - component: {fileID: 7640182384127928161}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

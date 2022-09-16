@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2608275738874683652}
   - component: {fileID: 7602532919976394930}
   - component: {fileID: 2290745083233153912}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 4642968957573075296}
   - component: {fileID: 2971728327233651510}
   - component: {fileID: 644371919073087671}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -231,7 +231,7 @@ GameObject:
   - component: {fileID: 7219815635633025251}
   - component: {fileID: 4413245766060819656}
   - component: {fileID: 934303682}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Portal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -345,7 +345,7 @@ GameObject:
   - component: {fileID: 8033536295475746006}
   - component: {fileID: 6692136861537253396}
   - component: {fileID: 7897421949731295914}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -429,7 +429,7 @@ GameObject:
   - component: {fileID: 3762243872006079654}
   - component: {fileID: 7221537588409996406}
   - component: {fileID: 7249252088010688860}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

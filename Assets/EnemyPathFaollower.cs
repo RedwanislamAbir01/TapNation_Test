@@ -23,6 +23,8 @@ public class EnemyPathFaollower : MonoBehaviour
     {
         SetRandomSpeed();
         _canFollow = true;
+
+        GetComponent<Enemy>().OnDeath += DisableFollow ;
     }
 
     private void Update()
@@ -46,6 +48,7 @@ public class EnemyPathFaollower : MonoBehaviour
     {
         _speed = Random.Range(_minSpeed, _maxSpeed);
     }
+    public void DisableFollow() => _canFollow = false;
     #endregion
 }
 

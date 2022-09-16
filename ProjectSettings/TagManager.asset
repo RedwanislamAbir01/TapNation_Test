@@ -5,16 +5,18 @@ TagManager:
   serializedVersion: 2
   tags:
   - PlayerBase
+  - Gun
+  - Bullet
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Bullet
+  - Gate
+  - Enemy
   - 
   - 
   - 

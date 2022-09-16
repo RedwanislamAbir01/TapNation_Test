@@ -99,7 +99,7 @@ namespace _Game.Controllers
                         break;
                     case TouchPhase.Ended:
                         _isTouchActive = false;
-                        _modelToRotate.DOLocalRotate(Vector3.zero, _rotationDuration);
+                     
                         break;
                     case TouchPhase.Stationary:
                         break;
@@ -114,18 +114,11 @@ namespace _Game.Controllers
 
         private void HandleRotation(float inputValue, float threshold)
         {
-            if (inputValue > threshold) SetRotation(new Vector3(0f, _rotationRange, 0f));
-            if (inputValue < -threshold) SetRotation(new Vector3(0f, -_rotationRange, 0f));
-            if (inputValue == 0) SetRotation(Vector3.zero);
+          
         }
 
-        private void SetRotation(Vector3 rotation) => _modelToRotate.DOLocalRotate(rotation, _rotationDuration);
+  
 
-#if UNITY_EDITOR
-        [Sirenix.OdinInspector.Button, Sirenix.OdinInspector.PropertySpace]
-        public void AssignFirstChildAsRotationModel() => _modelToRotate = transform.GetChild(0);
-        [Sirenix.OdinInspector.Button]
-#endif
         public void EnableControl() => _canControl = true;
 #if UNITY_EDITOR
         [Sirenix.OdinInspector.Button]
