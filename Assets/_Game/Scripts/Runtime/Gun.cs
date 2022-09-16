@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using _Game.Managers;
 public class Gun : MonoBehaviour
 {
     [SerializeField]
@@ -20,18 +20,23 @@ public class Gun : MonoBehaviour
     [SerializeField]
     private float _minDelay, _maxDelay;
 
+    bool canShoot = false;
      // Update is called once per frame
      private void Start()
     {
         _delay = Random.Range(_minDelay, _maxDelay);
+        GameManager.Instance.OnLevelStart += StartShooting;
     }
     void Update()
     {
-        timer += Time.deltaTime;
-        if (timer >_delay)
+        if (canShoot)
         {
-            Shoot();
-            timer = 0;
+            timer += Time.deltaTime;
+            if (timer > _delay)
+            {
+                Shoot();
+                timer = 0;
+            }
         }
     }
 
@@ -57,4 +62,6 @@ public class Gun : MonoBehaviour
             }
         }
     }
+  public void StopShooting() => canShoot = false;
+    public void StartShooting() => canShoot = true;
 }

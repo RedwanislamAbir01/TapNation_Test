@@ -54,6 +54,8 @@ MonoBehaviour:
   _maxX: 3
   _enemyDeathMat: {fileID: 2100000, guid: d0479f3c48f19e545b207a7a44b10285, type: 2}
   _enemyModel: {fileID: 8806866733519649674}
+  lockPlayerChaseSpeed: 3
+  lockPlayerMinDistance: 17
 --- !u!114 &5287395819611518643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,8 +70,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveDirection: {x: 0, y: 0, z: -1}
   _speed: 5
-  _minSpeed: 4
-  _maxSpeed: 7
+  _minSpeed: 5
+  _maxSpeed: 9
 --- !u!136 &1981169498302171135
 CapsuleCollider:
   m_ObjectHideFlags: 0

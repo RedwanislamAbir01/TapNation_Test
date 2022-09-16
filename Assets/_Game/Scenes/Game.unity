@@ -739,6 +739,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6812532146592163647, guid: de2f1d32d6a29414bb4b33f191010284, type: 3}
+      propertyPath: _playerChild
+      value: 
+      objectReference: {fileID: 224588880}
+    - target: {fileID: 6812532146592163647, guid: de2f1d32d6a29414bb4b33f191010284, type: 3}
+      propertyPath: _playerVisual
+      value: 
+      objectReference: {fileID: 224588880}
+    - target: {fileID: 6812532146592163647, guid: de2f1d32d6a29414bb4b33f191010284, type: 3}
+      propertyPath: _modelToRotate
+      value: 
+      objectReference: {fileID: 224588880}
+    - target: {fileID: 6812532146592163647, guid: de2f1d32d6a29414bb4b33f191010284, type: 3}
+      propertyPath: _controllerTypes
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6812532146592163647, guid: de2f1d32d6a29414bb4b33f191010284, type: 3}
+      propertyPath: _horizontalMovementRange
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6812532146592163647, guid: de2f1d32d6a29414bb4b33f191010284, type: 3}
+      propertyPath: _horizontalRotationRange
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6812532147908454680, guid: de2f1d32d6a29414bb4b33f191010284, type: 3}
       propertyPath: m_Name
       value: Player
@@ -820,6 +844,11 @@ Transform:
   m_Father: {fileID: 809139292}
   m_RootOrder: 40
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &224588880 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6812532146592163640, guid: de2f1d32d6a29414bb4b33f191010284, type: 3}
+  m_PrefabInstance: {fileID: 204358017}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &279306048
 GameObject:
   m_ObjectHideFlags: 0

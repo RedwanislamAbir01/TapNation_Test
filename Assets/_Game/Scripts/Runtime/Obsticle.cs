@@ -13,10 +13,13 @@ public class Obsticle : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        collision.gameObject.SetActive(false);
-        playerCreator.players.Remove(collision.gameObject);
-        collision.transform.parent = null;
-        StartCoroutine(HoldOff());
+        if (!collision.gameObject.GetComponent<Enemy>())
+        {
+            collision.gameObject.SetActive(false);
+            playerCreator.players.Remove(collision.gameObject);
+            collision.transform.parent = null;
+            StartCoroutine(HoldOff());
+        }
     }
 
     IEnumerator HoldOff()

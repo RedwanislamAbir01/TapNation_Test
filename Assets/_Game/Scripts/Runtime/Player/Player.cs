@@ -17,14 +17,14 @@ public class Player : MonoBehaviour
     {
         playerCreator = GetComponentInParent<PlayerCreator>();
         Center = playerCreator.transform;
-       
+      
     }
 
     void Start()
     {
         GameManager.Instance.OnLevelEnd += HoldOffFalse;
         _anim = GetComponent<Animator>();
-        PlayAimAnim();
+        GameManager.Instance.OnLevelStart += PlayAimAnim;
     }
     void FixedUpdate()
     {
@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
         }
     }
     // Update is called once per frame
-    void PlayAimAnim() => _anim.SetTrigger(Shoot);
+   public void PlayAimAnim() => _anim.SetTrigger(Shoot);
 
     void HoldOffFalse() {
         GetComponent<Collider>().isTrigger = true;

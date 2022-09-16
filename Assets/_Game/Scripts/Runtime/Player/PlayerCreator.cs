@@ -32,6 +32,8 @@ public class PlayerCreator : MonoBehaviour
         for (int i = 0; i < size; i++)
         {
             GameObject newPlayer = Instantiate(player, PlayerPosition(), Quaternion.identity, transform);
+            newPlayer.GetComponent<Player>().PlayAimAnim();
+            newPlayer.GetComponentInChildren<Gun>().StartShooting();
             players.Add(newPlayer);
         }
     }

@@ -7,26 +7,32 @@ using UnityEngine;
 
 namespace _Game.Controllers
 {
+    public enum ControllerTypes
+    {
+        Keyboard,
+        Mobile
+    }
     public class RunnerController : MonoBehaviour
     {
         #region Variables
 
-        [SerializeField] private Transform _modelToRotate;
+        [SerializeField] private ControllerTypes _controllerTypes = ControllerTypes.Keyboard;
+        [SerializeField] private Transform _playerChild;
+        [SerializeField] private Transform _playerVisual;
+        [Header("Common Control")]
+        [SerializeField] [Min(0f)] private float _horizontalMovementRange = 2f;
 
-        [Header("Common Settings")] 
-        [SerializeField] [Range(0f, 10f)] private float _horizontalRange = 2f;
+        [SerializeField] [Range(0f, 360f)] private float _horizontalRotationRange = 10f;
+        [SerializeField] [Min(0f)] private float _horizontalRotationDuration = 0.1f;
 
-        [SerializeField] [Range(0f, 360f)] private float _rotationRange = 7f;
-        [SerializeField] [Min(0f)] private float _rotationDuration = 0.1f;
+        [Header("Touch Control")]
+        [SerializeField] [Min(0f)] private float _touchSpeed = 0.06f;
 
-        [Header("Windows Settings")] 
-        [SerializeField] [Min(0f)] private float _keyboardSpeed = 3f;
+        [Header("Keyboard Control")]
+        [SerializeField] [Min(0f)] private float _keyboardSpeed = 10f;
 
-        [Header("Android/IOS Settings")] 
-        [SerializeField] [Min(0f)] private float _touchSpeed = 0.1f;
-
-        private float _xPosition;
-        private bool _isTouchActive;
+        private float _positionX;
+        private bool _isTouching;
         private bool _canControl;
 
         #endregion
@@ -64,53 +70,77 @@ namespace _Game.Controllers
         
         private void HandleControl()
         {
-            HandleKeyboardControl();
-            HandleTouchControl();
+            switch (_controllerTypes)
+            {
+                case ControllerTypes.Mobile:
+                    HandleTouchInput();
+                    break;
+
+                case ControllerTypes.Keyboard:
+                    HandleKeyboardInput();
+                    break;
+
+            }
         }
 
-        private void HandleKeyboardControl()
+        private void HandleTouchInput()
         {
-            var horizontalInput = Input.GetAxis("Horizontal") * _keyboardSpeed * Time.deltaTime;
-            var newPosition = transform.localPosition + Vector3.right * horizontalInput;
-
-            newPosition.x = Mathf.Clamp(newPosition.x, -_horizontalRange, _horizontalRange);
-            transform.localPosition = newPosition;
-
-            HandleRotation(Input.GetAxis("Horizontal"), ConstUtils.KEYBOARD_ROTATION_THRESHOLD);
-        }
-
-        private void HandleTouchControl()
-        {
-            foreach (var touch in Input.touches)
+            foreach (Touch touch in Input.touches)
             {
                 switch (touch.phase)
                 {
                     case TouchPhase.Began:
-                        if (!_isTouchActive) _isTouchActive = true;
-                        break;
+                        {
+                            if (!_isTouching)
+                            {
+                                _isTouching = true;
+                            }
+
+                            break;
+                        }
                     case TouchPhase.Moved:
-                        var deltaX = touch.deltaPosition.x;
-                        _xPosition += (deltaX / Screen.width) * Time.deltaTime / _touchSpeed;
-                        _xPosition = Mathf.Clamp(_xPosition, -_horizontalRange, _horizontalRange);
-                        var objectTransform = transform;
-                        var localPosition = objectTransform.localPosition;
-                        objectTransform.localPosition = new Vector3(_xPosition, localPosition.y, localPosition.z);
-                        HandleRotation(deltaX, ConstUtils.MOBILE_ROTATION_THRESHOLD);
-                        break;
+                        {
+                            float deltaX = touch.deltaPosition.x;
+                            _positionX += (deltaX / Screen.width) / Time.deltaTime * _touchSpeed;
+                            _positionX = Mathf.Clamp(_positionX, -_horizontalMovementRange, _horizontalMovementRange);
+
+                            Vector3 playerChildPosition = _playerChild.localPosition;
+                            _playerChild.localPosition = new Vector3(_positionX , playerChildPosition.y, playerChildPosition.z);
+
+                            if (deltaX > 2f)
+                                _playerVisual.DOLocalRotate(new Vector3(0f, -_horizontalRotationRange, 0f), _horizontalRotationDuration);
+
+                            if (deltaX < -2)
+                                _playerVisual.DOLocalRotate(new Vector3(0f, _horizontalRotationRange, 0f), _horizontalRotationDuration);
+
+                            if (deltaX == 0) _playerVisual.DOLocalRotate(Vector3.zero, _horizontalRotationDuration);
+
+                            break;
+                        }
                     case TouchPhase.Ended:
-                        _isTouchActive = false;
-                     
-                        break;
-                    case TouchPhase.Stationary:
-                        break;
-                    case TouchPhase.Canceled:
-                        break;
-                    default:
-                     
+                        _isTouching = false;
+                        _playerVisual.DOLocalRotate(Vector3.zero, _horizontalRotationDuration);
                         break;
                 }
             }
         }
+        private void HandleKeyboardInput()
+        {
+            float horizontalValue = -Input.GetAxis("Horizontal") * Time.deltaTime * _keyboardSpeed;
+            Vector3 newPosition = _playerChild.localPosition + Vector3.forward * horizontalValue;
+
+            newPosition.z = Mathf.Clamp(newPosition.z, -_horizontalMovementRange, _horizontalMovementRange);
+            _playerChild.localPosition = newPosition;
+
+            if (Input.GetAxisRaw("Horizontal") > 0.1f)
+                _playerVisual.DOLocalRotate(new Vector3(0f, _horizontalRotationRange, 0f), _horizontalRotationDuration);
+
+            if (Input.GetAxisRaw("Horizontal") < -0.1f)
+                _playerVisual.DOLocalRotate(new Vector3(0f, -_horizontalRotationRange, 0f), _horizontalRotationDuration);
+
+            if (Input.GetAxisRaw("Horizontal") == 0) _playerVisual.DOLocalRotate(new Vector3(0f, 0f, 0f), _horizontalRotationDuration);
+        }
+
 
         private void HandleRotation(float inputValue, float threshold)
         {

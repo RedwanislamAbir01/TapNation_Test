@@ -22,8 +22,16 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float _minX, _maxX;
     [SerializeField] private Material _enemyDeathMat;
     [SerializeField] private GameObject _enemyModel;
+    [SerializeField] private float lockPlayerChaseSpeed = 3;
+    [SerializeField] private float lockPlayerMinDistance = 20;
+
+
     Animator _anim;
     private bool isKilled = false;
+    private Vector3 directionToFace;
+
+    private float lockPlayerChaseStep;
+
     #endregion
     void Start()
     {
@@ -35,7 +43,19 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        LookTowardsPlayerRange();
+    }
+    void LookTowardsPlayerRange()
+    {
+        if ((playerCreator.transform.parent.localPosition.z - transform.localPosition.z) >= lockPlayerMinDistance)
+        {
+           
+            directionToFace =  playerCreator.transform.parent.position - _enemyModel.transform.position ;
+            _enemyModel.transform.rotation = Quaternion.LookRotation(directionToFace);
+         
+            lockPlayerChaseStep = lockPlayerChaseSpeed * Time.deltaTime; // calculate distance to move
+            transform.localPosition = Vector3.MoveTowards(transform.localPosition, playerCreator.transform.localPosition, lockPlayerChaseStep);
+        }
     }
     void RandomXspawn()
     {
@@ -73,6 +93,7 @@ public class Enemy : MonoBehaviour
         if (other.gameObject.CompareTag("Bullet"))
         {
             other.gameObject.GetComponent<Collider>().enabled = false;
+            GetComponentInParent<EnemySpawner>().Enemies.Remove(gameObject);
             KillEnemy();
         }
     }
