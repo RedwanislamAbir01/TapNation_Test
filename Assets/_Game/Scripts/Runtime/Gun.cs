@@ -5,7 +5,7 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     [SerializeField]
-    private Transform _shootPos;
+     private Transform _shootPos;
  
      [SerializeField]
     private int _numberOfBullets;

@@ -42,8 +42,12 @@ public class PlayerCreator : MonoBehaviour
     {
         for (int i = 0; i < players.Count; i++)
         {
-            players[i].transform.parent = FindObjectOfType<FinishLine>()._container.transform;
-              players[i].transform.DOLocalMove(FindObjectOfType<FinishLine>().EndPoses[i].transform.localPosition, .05f*i).SetDelay(.05f*i);
+              players[i].transform.parent = FindObjectOfType<FinishLine>()._container.transform;
+              players[i].transform.DOLocalMove(FindObjectOfType<FinishLine>()._container.transform.localPosition, .5f).SetDelay(.05f * i).SetEase(Ease.InSine).OnComplete(() => {
+                  for (int i = 0; i < players.Count; i++)
+                  players[i].transform.DOLocalMove(FindObjectOfType<FinishLine>().EndPoses[i].transform.localPosition, .05f * i).SetDelay(.05f * i);
+              });
+                 
         } 
     }
 }

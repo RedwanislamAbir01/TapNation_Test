@@ -465,7 +465,7 @@ MonoBehaviour:
   _bullet: {fileID: 6417845064221852124, guid: 595e32452576b124eac182394c89e7ce, type: 3}
   _delay: 1
   _minDelay: 1
-  _maxDelay: 3
+  _maxDelay: 1.5
 --- !u!1 &1290183863941009402
 GameObject:
   m_ObjectHideFlags: 0
@@ -1904,7 +1904,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 135029804239594917, guid: 3066093c9be99914fb727e3dc778ef88, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3066093c9be99914fb727e3dc778ef88, type: 3}
 --- !u!1 &7062918106160332127 stripped
 GameObject:

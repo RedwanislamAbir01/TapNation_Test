@@ -8,10 +8,7 @@ public class FinishLine : MonoBehaviour
     public GameObject _container;
     void Start()
     {
-        foreach (Transform child in _container.transform)
-        {
-            EndPoses.Add(child.transform);
-        }
+
 
     }
 
