@@ -32,7 +32,10 @@ public class PlayerCreator : MonoBehaviour
         _Game.Managers.GameManager.Instance.OnLevelEnd += MoveToEnd;
         CountInitialPlayers();
     }
-
+    private void OnDisable()
+    {
+        _Game.Managers.GameManager.Instance.OnLevelEnd -= MoveToEnd;
+    }
     private void CountInitialPlayers()
     {
         players.Add(GetComponentInChildren<Player>().gameObject);

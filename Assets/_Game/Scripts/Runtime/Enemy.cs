@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
     #region Events
     public event Action OnDeath;
     #endregion
+
+
     #region Variables
 
     public enum eEnemyType
@@ -33,6 +35,8 @@ public class Enemy : MonoBehaviour
     private float lockPlayerChaseStep;
 
     #endregion
+
+    #region Unity Methods
     void Start()
     {
         playerCreator = GameObject.FindGameObjectWithTag("PlayerBase").GetComponent<PlayerCreator>();
@@ -40,11 +44,14 @@ public class Enemy : MonoBehaviour
         RandomXspawn();
     }
 
-    // Update is called once per frame
+  
     void Update()
     {
         LookTowardsPlayerRange();
     }
+    #endregion
+
+    #region Custom methods
     void LookTowardsPlayerRange()
     {
         if ((playerCreator.transform.parent.localPosition.z - transform.localPosition.z) >= lockPlayerMinDistance)
@@ -115,4 +122,5 @@ public class Enemy : MonoBehaviour
             GameManager.Instance.LevelCompleted();
         }
     }
+    #endregion
 }

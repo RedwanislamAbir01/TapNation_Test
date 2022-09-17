@@ -27,7 +27,10 @@ public class EnemyPathFaollower : MonoBehaviour
         GetComponent<Enemy>().OnDeath += DisableFollow ;
         GameManager.Instance.OnLevelEnd += DisableFollow;
     }
-
+    private void OnDisable()
+    {
+        GameManager.Instance.OnLevelEnd -= DisableFollow;
+    }
     private void Update()
     {
         if (_canFollow) FollowPath();

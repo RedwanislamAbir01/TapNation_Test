@@ -46,6 +46,11 @@ public class Gun : MonoBehaviour
         GameManager.Instance.OnLevelStart += StartShooting;
         GameManager.Instance.OnLevelCompleted += StopShooting;
     }
+    private void OnDisable()
+    {
+        GameManager.Instance.OnLevelStart -= StartShooting;
+        GameManager.Instance.OnLevelCompleted -= StopShooting;
+    }
     void Update()
     {
         if (canShoot)

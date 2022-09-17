@@ -28,9 +28,12 @@ public class EnemySpawner : MonoBehaviour
   
 
     }
+
     private void OnDisable()
     {
+        GameManager.Instance.OnLevelEnd -= StopSpwaner;
         GameManager.Instance.OnLevelStart -= StartSpawningEnemyWaves;
+        GameManager.Instance.OnLevelStart -= InitialSpawn;
     }
     public void StartSpawningEnemyWaves()
     {

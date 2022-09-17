@@ -26,7 +26,7 @@ namespace _Game.Controllers
         private void Start()
         {
            GameManager.Instance.OnLevelStart += GameManager_OnLevelStart;
-            GameManager.Instance.OnLevelEnd += StopFollowing;
+           GameManager.Instance.OnLevelEnd += StopFollowing;
         }
 
         private void Update()

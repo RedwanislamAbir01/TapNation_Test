@@ -26,6 +26,12 @@ public class Player : MonoBehaviour
         _anim = GetComponent<Animator>();
         GameManager.Instance.OnLevelStart += PlayAimAnim;
     }
+    private void OnDisable()
+    {
+        GameManager.Instance.OnLevelEnd -= HoldOffFalse;
+        
+        GameManager.Instance.OnLevelStart -= PlayAimAnim;
+    }
     void FixedUpdate()
     {
         if (!playerCreator.holdoff)
