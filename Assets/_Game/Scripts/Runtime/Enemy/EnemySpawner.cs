@@ -71,7 +71,9 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    void StopSpwaner() { isSpawnerStopped = true; StopAllCoroutines(); }
+    void StopSpwaner() { isSpawnerStopped = true;
+    
+        StopAllCoroutines(); }
 
 
 }

@@ -1387,7 +1387,7 @@ MonoBehaviour:
   _dontDestroyOnLoad: 0
   _levelPrefabs:
   - {fileID: 7025732137689082804, guid: 3f464ea45dd7f6649b9c102870fa677d, type: 3}
-  - {fileID: 7025732137689082804, guid: 7c1b063e99d72e14fa519e70d42dc570, type: 3}
+  - {fileID: 7025732137689082804, guid: 029e17eff4157424b8e39aaba084800e, type: 3}
   currentLvlPrefab: {fileID: 0}
 --- !u!1001 &1678602133
 PrefabInstance:
