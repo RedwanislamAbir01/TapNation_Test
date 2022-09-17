@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 public class Portal : MonoBehaviour
 {
     public enum SpawnerState
@@ -44,6 +45,7 @@ public class Portal : MonoBehaviour
         meshRenderer.enabled = false;
         sizeText.gameObject.SetActive(false);
         gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
+        transform.parent.DOLocalMoveY(-1.5f, 1);
     }
     public IEnumerator GateActive()
     {

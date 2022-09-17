@@ -125,7 +125,7 @@ namespace _Game.Controllers
         }
         private void HandleKeyboardInput()
         {
-            float horizontalValue = -Input.GetAxis("Horizontal") * Time.deltaTime * _keyboardSpeed;
+            float horizontalValue = Input.GetAxis("Horizontal") * Time.deltaTime * _keyboardSpeed;
             Vector3 newPosition = _playerChild.localPosition + Vector3.right * horizontalValue;
 
             newPosition.x = Mathf.Clamp(newPosition.x, -_horizontalMovementRange, _horizontalMovementRange);

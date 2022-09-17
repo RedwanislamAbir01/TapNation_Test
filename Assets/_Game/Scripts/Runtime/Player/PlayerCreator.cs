@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using DG.Tweening;
 using _Game.Managers;
+using UnityEngine.Pool;
 public class PlayerCreator : MonoBehaviour
 {
     public GameObject player;
@@ -11,9 +12,23 @@ public class PlayerCreator : MonoBehaviour
     public List<GameObject> players = new List<GameObject>();
     [SerializeField] public bool holdoff = false;
 
-
+    private ObjectPool<GameObject> _pool;
     private void Start()
     {
+        _pool = new ObjectPool<GameObject>(() =>
+        {
+            return (Instantiate(player, PlayerPosition(), Quaternion.identity, transform));
+        }, g =>
+       {
+           g.gameObject.SetActive(true);
+       }, g =>
+       {
+           g.gameObject.SetActive(false);
+       }, g =>
+       {
+           Destroy(g.gameObject);
+       }, false, 100, 150);
+
         _Game.Managers.GameManager.Instance.OnLevelEnd += MoveToEnd;
         CountInitialPlayers();
     }
@@ -32,7 +47,7 @@ public class PlayerCreator : MonoBehaviour
     {
         for (int i = 0; i < size; i++)
         {
-            GameObject newPlayer = Instantiate(player, PlayerPosition(), Quaternion.identity, transform);
+            GameObject newPlayer = _pool.Get();
             newPlayer.GetComponent<Player>().PlayAimAnim();
             newPlayer.GetComponentInChildren<Gun>().StartShooting();
             players.Add(newPlayer);
@@ -84,6 +99,7 @@ public class PlayerCreator : MonoBehaviour
             }
 
         }
+
 
     }
 

@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class GunHolder : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] private GameObject[] _guns;
+    int index;
     void Start()
     {
-        
+        index = PlayerPrefs.GetInt("GunNo", 0);
+        Updater();
+        GetComponentInParent<GunUpdater>().OnGunUpdate += Updater;
     }
 
-    // Update is called once per frame
-    void Update()
+   void Updater ()
     {
-        
+     for (int i = 0; i < _guns.Length; i++)
+        {
+            _guns[i].gameObject.SetActive(false);
+        }
+       _guns[index].gameObject.SetActive(true);
+       _guns[index].gameObject.GetComponent<Gun>().StartShooting();
     }
 }
