@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using _Game.Managers;
+using DG.Tweening;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject _enemy;
@@ -24,7 +25,7 @@ public class EnemySpawner : MonoBehaviour
         GameManager.Instance.OnLevelEnd += StopSpwaner;
         GameManager.Instance.OnLevelStart += StartSpawningEnemyWaves;
         GameManager.Instance.OnLevelStart += InitialSpawn;
-
+  
 
     }
     private void OnDisable()
@@ -68,4 +69,6 @@ public class EnemySpawner : MonoBehaviour
     }
 
     void StopSpwaner() => isSpawnerStopped = true;
+
+
 }

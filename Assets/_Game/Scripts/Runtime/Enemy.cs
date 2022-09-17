@@ -50,7 +50,7 @@ public class Enemy : MonoBehaviour
         if ((playerCreator.transform.parent.localPosition.z - transform.localPosition.z) >= lockPlayerMinDistance)
         {
            
-            directionToFace =  playerCreator.transform.parent.position - _enemyModel.transform.position ;
+            directionToFace =  playerCreator.transform.position - _enemyModel.transform.position ;
             _enemyModel.transform.rotation = Quaternion.LookRotation(directionToFace);
          
             lockPlayerChaseStep = lockPlayerChaseSpeed * Time.deltaTime; // calculate distance to move
@@ -103,7 +103,8 @@ public class Enemy : MonoBehaviour
             playerCreator.players.Remove(other.gameObject);
             other.transform.parent = null;
             other.gameObject.SetActive(false);
-            gameObject.SetActive(false);
+            GetComponentInParent<EnemySpawner>().Enemies.Remove(gameObject);
+            Destroy(gameObject);
         }
     }
 
