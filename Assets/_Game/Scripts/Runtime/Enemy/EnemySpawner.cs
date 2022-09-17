@@ -25,7 +25,7 @@ public class EnemySpawner : MonoBehaviour
         GameManager.Instance.OnLevelEnd += StopSpwaner;
         GameManager.Instance.OnLevelStart += StartSpawningEnemyWaves;
         GameManager.Instance.OnLevelStart += InitialSpawn;
-  
+        GameManager.Instance.OnLevelFail += StopSpwaner;
 
     }
 
@@ -71,7 +71,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    void StopSpwaner() => isSpawnerStopped = true;
+    void StopSpwaner() { isSpawnerStopped = true; StopAllCoroutines(); }
 
 
 }

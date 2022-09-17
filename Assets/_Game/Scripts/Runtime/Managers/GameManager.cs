@@ -34,6 +34,7 @@ namespace _Game.Managers
         {
             OnNextLevelLoad?.Invoke();
         }
+    
 
         public void LevelCompleted()
         {

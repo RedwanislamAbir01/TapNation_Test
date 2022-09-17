@@ -18,6 +18,8 @@ public class Obsticle : MonoBehaviour
             collision.gameObject.SetActive(false);
             playerCreator.players.Remove(collision.gameObject);
             collision.transform.parent = null;
+            playerCreator.UpdateText(); 
+            playerCreator.CheckPlayerExist();
             StartCoroutine(HoldOff());
         }
     }

@@ -53,8 +53,8 @@ MonoBehaviour:
   _maxX: 3
   _enemyDeathMat: {fileID: 2100000, guid: d0479f3c48f19e545b207a7a44b10285, type: 2}
   _enemyModel: {fileID: 8806866733519649674}
-  lockPlayerChaseSpeed: 5
-  lockPlayerMinDistance: 5
+  lockPlayerChaseSpeed: 6
+  lockPlayerMinDistance: 8
 --- !u!114 &5287395819611518643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,7 +79,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8572935539998529715}
   m_Material: {fileID: 13400000, guid: d889b051d7e4a8d4bb456e70750e368b, type: 2}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.31652817
   m_Height: 2.7297173

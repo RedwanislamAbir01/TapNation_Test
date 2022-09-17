@@ -43,11 +43,13 @@ namespace _Game.Controllers
         {
              GameManager.Instance.OnLevelStart += GameManager_OnLevelStart;
              GameManager.Instance.OnLevelEnd += DisableControl;
+            GameManager.Instance.OnLevelFail += DisableControl;
         }
         private void OnDisable()
         {
             GameManager.Instance.OnLevelStart -= GameManager_OnLevelStart;
             GameManager.Instance.OnLevelEnd -= DisableControl;
+            GameManager.Instance.OnLevelFail -= DisableControl;
         }
 
         private void Update()

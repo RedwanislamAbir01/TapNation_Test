@@ -15,7 +15,7 @@ public class FinishLine : MonoBehaviour
     {
         if(other.gameObject.CompareTag("PlayerBase"))
         {
-            GameManager.Instance.LevelEnd();
+         GameManager.Instance.LevelEnd();
         }
     }
 

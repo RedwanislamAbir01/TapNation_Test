@@ -13,6 +13,10 @@ public class PlayerCreator : MonoBehaviour
     [SerializeField] public bool holdoff = false;
 
     private ObjectPool<GameObject> _pool;
+    private void Awake()
+    {
+        CountInitialPlayers();
+    }
     private void Start()
     {
         _pool = new ObjectPool<GameObject>(() =>
@@ -30,7 +34,7 @@ public class PlayerCreator : MonoBehaviour
        }, false, 100, 150);
 
         _Game.Managers.GameManager.Instance.OnLevelEnd += MoveToEnd;
-        CountInitialPlayers();
+       
     }
     private void OnDisable()
     {
@@ -39,9 +43,12 @@ public class PlayerCreator : MonoBehaviour
     private void CountInitialPlayers()
     {
         players.Add(GetComponentInChildren<Player>().gameObject);
+        UpdateText();
     }
 
-    private void Update()
+ 
+
+    public void UpdateText()
     {
         playerCountText.text = players.Count.ToString();
     }
@@ -94,16 +101,28 @@ public class PlayerCreator : MonoBehaviour
             {
                 case Portal.SpawnerState.additive:
                     SpawnPlayer(_portal.size);
+                    UpdateText();
+                    CheckPlayerExist();
                     break;
                 case Portal.SpawnerState.multiplier:
                     int multiplierSize = players.Count * _portal.size - players.Count;
                    SpawnPlayer(multiplierSize);
+                    UpdateText();
+                    CheckPlayerExist();
                     break;
             }
 
         }
 
 
+    }
+
+    public void CheckPlayerExist()
+    {
+        if(players.Count <= 0)
+        {
+            GameManager.Instance.LevelFail();
+        }
     }
 
 }

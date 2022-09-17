@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
     private Vector3 directionToFace;
 
     private float lockPlayerChaseStep;
-
+    bool reachedEnd;
     #endregion
 
     #region Unity Methods
@@ -42,6 +42,7 @@ public class Enemy : MonoBehaviour
         playerCreator = GameObject.FindGameObjectWithTag("PlayerBase").GetComponent<PlayerCreator>();
         _anim = GetComponentInChildren<Animator>();
         RandomXspawn();
+        GameManager.Instance.OnLevelEnd += ReachedEnd;
     }
 
   
@@ -54,16 +55,22 @@ public class Enemy : MonoBehaviour
     #region Custom methods
     void LookTowardsPlayerRange()
     {
-        if ((transform.position.z - playerCreator.transform.parent.position.z) <= lockPlayerMinDistance)
-        {
+        if (reachedEnd)
+            return;
 
-            directionToFace = playerCreator.transform.position - transform.position;
-            transform.LookAt(new Vector3(playerCreator.transform.position.x , .5f , playerCreator.transform.position.z));
-            GetComponent<EnemyPathFaollower>().SetSpeed(lockPlayerChaseSpeed);
-
-        }
         else
-            transform.localEulerAngles = new Vector3(0, -180, 0);
+        {
+            if ((transform.position.z - playerCreator.transform.parent.position.z) <= lockPlayerMinDistance)
+            {
+
+                directionToFace = playerCreator.transform.position - transform.position;
+                transform.LookAt(new Vector3(playerCreator.transform.position.x, .5f, playerCreator.transform.position.z));
+                GetComponent<EnemyPathFaollower>().SetSpeed(lockPlayerChaseSpeed);
+
+            }
+            else
+                transform.localEulerAngles = new Vector3(0, -180, 0);
+        }
     }
     void RandomXspawn()
     {
@@ -109,13 +116,15 @@ public class Enemy : MonoBehaviour
         {
             isKilled = true;
             playerCreator.players.Remove(other.gameObject);
+            playerCreator.UpdateText();
+            playerCreator.CheckPlayerExist();
             other.transform.parent = null;
             other.gameObject.SetActive(false);
             GetComponentInParent<EnemySpawner>().Enemies.Remove(gameObject);
             Destroy(gameObject);
         }
     }
-
+    void ReachedEnd() => reachedEnd = true;
     private void CheckIfAllEnnimiesDead()
     {
         if (GetComponentInParent<EnemySpawner>().Enemies.Count <= 0  && GetComponentInParent<EnemySpawner>().IsSpawningStopped)
