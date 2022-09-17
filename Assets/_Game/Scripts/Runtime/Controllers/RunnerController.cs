@@ -42,8 +42,14 @@ namespace _Game.Controllers
         private void Start()
         {
              GameManager.Instance.OnLevelStart += GameManager_OnLevelStart;
+             GameManager.Instance.OnLevelEnd += DisableControl;
         }
-        
+        private void OnDisable()
+        {
+            GameManager.Instance.OnLevelStart -= GameManager_OnLevelStart;
+            GameManager.Instance.OnLevelEnd -= DisableControl;
+        }
+
         private void Update()
         {
             if (_canControl) HandleControl();
@@ -53,14 +59,7 @@ namespace _Game.Controllers
         {
             if (GameManager.Instance) GameManager.Instance.OnLevelStart -= GameManager_OnLevelStart;
         }
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.gameObject.CompareTag("Finish"))
-            {
-                GameManager.Instance.LevelEnd();
-                _canControl = false;
-            }
-        }
+  
 
         #endregion
 

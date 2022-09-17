@@ -11,7 +11,7 @@ namespace _Game.Managers
         public event Action OnLevelEnd;
         public event Action OnLevelFail;
         public event Action OnNextLevelLoad;
-        
+        public event Action OnLevelCompleted;
         #endregion
 
         #region Custom Methods
@@ -33,6 +33,12 @@ namespace _Game.Managers
         {
             OnNextLevelLoad?.Invoke();
         }
+
+        public void LevelCompleted()
+        {
+            OnLevelCompleted?.Invoke();
+        }
+
         #endregion
     }
 }

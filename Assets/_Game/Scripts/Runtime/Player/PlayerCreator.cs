@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
-
+using _Game.Managers;
 public class PlayerCreator : MonoBehaviour
 {
     public GameObject player;
     public TextMeshProUGUI playerCountText;
     public List<GameObject> players = new List<GameObject>();
     [SerializeField] public bool holdoff = false;
+
 
     private void Start()
     {
@@ -53,12 +54,17 @@ public class PlayerCreator : MonoBehaviour
               players[i].transform.parent = FindObjectOfType<FinishLine>()._container.transform;
               players[i].transform.DOLocalMove(FindObjectOfType<FinishLine>()._container.transform.localPosition, .5f).SetDelay(.05f * i).SetEase(Ease.InSine).OnComplete(() => {
                   for (int i = 0; i < players.Count; i++)
-                  players[i].transform.DOLocalMove(FindObjectOfType<FinishLine>().EndPoses[i].transform.localPosition, .05f * i).SetDelay(.05f * i);
+                  players[i].transform.DOLocalMove(FindObjectOfType<FinishLine>().EndPoses[i].transform.localPosition, .05f * i).SetDelay(.05f * i).OnComplete(() => {
+                         
+                  });
+              
+
+
               });
                  
         } 
     }
-
+   
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.GetComponent<Portal>())
@@ -76,7 +82,9 @@ public class PlayerCreator : MonoBehaviour
                    SpawnPlayer(multiplierSize);
                     break;
             }
+
         }
+
     }
 
 }

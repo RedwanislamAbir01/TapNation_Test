@@ -26,6 +26,7 @@ public class Gun : MonoBehaviour
     {
         _delay = Random.Range(_minDelay, _maxDelay);
         GameManager.Instance.OnLevelStart += StartShooting;
+        GameManager.Instance.OnLevelCompleted += StopShooting;
     }
     void Update()
     {

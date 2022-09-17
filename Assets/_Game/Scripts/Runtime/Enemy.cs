@@ -4,7 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using System;
 using Random = UnityEngine.Random;
-
+using _Game.Managers;
 public class Enemy : MonoBehaviour
 {
     #region Events
@@ -95,17 +95,23 @@ public class Enemy : MonoBehaviour
             other.gameObject.GetComponent<Collider>().enabled = false;
             GetComponentInParent<EnemySpawner>().Enemies.Remove(gameObject);
             KillEnemy();
+            CheckIfAllEnnimiesDead();
         }
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player") && !isKilled)
+        if (other.gameObject.CompareTag("Player") && !isKilled)
         {
             isKilled = true;
-            playerCreator.players.Remove(collision.gameObject);
-            collision.transform.parent = null;
-            collision.gameObject.SetActive(false);
+            playerCreator.players.Remove(other.gameObject);
+            other.transform.parent = null;
+            other.gameObject.SetActive(false);
             gameObject.SetActive(false);
+        }
+    }
+
+    private void CheckIfAllEnnimiesDead()
+    {
+        if (GetComponentInParent<EnemySpawner>().Enemies.Count <= 0  && GetComponentInParent<EnemySpawner>().IsSpawningStopped)
+        {
+            GameManager.Instance.LevelCompleted();
         }
     }
 }

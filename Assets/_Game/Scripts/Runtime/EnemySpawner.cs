@@ -16,6 +16,7 @@ public class EnemySpawner : MonoBehaviour
 
 
     public List<GameObject> Enemies => enemies;
+    public bool IsSpawningStopped => isSpawnerStopped;
     void Start()
     {
         playerCreator = GameObject.FindGameObjectWithTag("PlayerBase").GetComponent<PlayerCreator>();

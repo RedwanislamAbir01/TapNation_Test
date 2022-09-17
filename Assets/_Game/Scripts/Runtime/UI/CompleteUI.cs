@@ -9,7 +9,7 @@ public class CompleteUI : MonoBehaviour
     void Start()
     {
         DisablePanel();
-        _manager.OnLevelEnd += EnablePanel;
+        _manager.OnLevelCompleted += EnablePanel;
     }
 
     private void OnDisable()

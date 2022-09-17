@@ -1014,7 +1014,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemy: {fileID: 8572935539998529715, guid: 9883799f08cbdce4499711e6b7dc0c06, type: 3}
   waveSpawnDelay: 5
-  waveAmount: 10
+  waveAmount: 50
   distanceFromPlayer: -17
   playerCreator: {fileID: 0}
 --- !u!1 &443087448
@@ -4745,7 +4745,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 1e86a0750f00af54f9490f20c9d89455, type: 3}
     - target: {fileID: 8720892976927279404, guid: 3e73d0f9bd290254d8b54b030f0c8ff0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8720892978196060094, guid: 3e73d0f9bd290254d8b54b030f0c8ff0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

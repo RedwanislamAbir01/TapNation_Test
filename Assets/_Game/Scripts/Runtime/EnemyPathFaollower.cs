@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using _Game.Managers;
 public class EnemyPathFaollower : MonoBehaviour
 {
     #region Variables
@@ -25,6 +25,7 @@ public class EnemyPathFaollower : MonoBehaviour
         _canFollow = true;
 
         GetComponent<Enemy>().OnDeath += DisableFollow ;
+    
     }
 
     private void Update()
@@ -49,6 +50,7 @@ public class EnemyPathFaollower : MonoBehaviour
         _speed = Random.Range(_minSpeed, _maxSpeed);
     }
     public void DisableFollow() => _canFollow = false;
+
     #endregion
 }
 
