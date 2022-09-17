@@ -53,7 +53,7 @@ MonoBehaviour:
   _maxX: 3
   _enemyDeathMat: {fileID: 2100000, guid: d0479f3c48f19e545b207a7a44b10285, type: 2}
   _enemyModel: {fileID: 8806866733519649674}
-  lockPlayerChaseSpeed: 6
+  lockPlayerChaseSpeed: 4.5
   lockPlayerMinDistance: 8
 --- !u!114 &5287395819611518643
 MonoBehaviour:

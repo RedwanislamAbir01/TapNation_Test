@@ -34,6 +34,8 @@ public class Enemy : MonoBehaviour
 
     private float lockPlayerChaseStep;
     bool reachedEnd;
+    bool hasReached;
+    GameObject target;
     #endregion
 
     #region Unity Methods
@@ -56,7 +58,13 @@ public class Enemy : MonoBehaviour
     void LookTowardsPlayerRange()
     {
         if (reachedEnd)
-            return;
+        {
+            
+                transform.LookAt(new Vector3(target.transform.position.x , .5f , target.transform.position.z));
+                GetComponent<EnemyPathFaollower>().SetSpeed(lockPlayerChaseSpeed);
+                hasReached = true;
+            
+        }
 
         else
         {
@@ -124,7 +132,10 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    void ReachedEnd() => reachedEnd = true;
+    void ReachedEnd() {
+        target = playerCreator.players[Random.Range(0, playerCreator.players.Count)];
+        reachedEnd = true;
+    }
     private void CheckIfAllEnnimiesDead()
     {
         if (GetComponentInParent<EnemySpawner>().Enemies.Count <= 0  && GetComponentInParent<EnemySpawner>().IsSpawningStopped)

@@ -33,6 +33,8 @@ public class CompleteUI : MonoBehaviour
 
    public void NextButtonActionListner()
     {
+        int i = PlayerPrefs.GetInt("current_scene_text", 0);
+        PlayerPrefs.SetInt("current_scene_text",i + 1);
         _manager.NextLevelLoad();
     }
 }
