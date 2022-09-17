@@ -54,15 +54,16 @@ public class Enemy : MonoBehaviour
     #region Custom methods
     void LookTowardsPlayerRange()
     {
-        if ((playerCreator.transform.parent.localPosition.z - transform.localPosition.z) >= lockPlayerMinDistance)
+        if ((transform.position.z - playerCreator.transform.parent.position.z) <= lockPlayerMinDistance)
         {
-           
-            directionToFace =  playerCreator.transform.position - _enemyModel.transform.position ;
-            _enemyModel.transform.rotation = Quaternion.LookRotation(directionToFace);
-         
-            lockPlayerChaseStep = lockPlayerChaseSpeed * Time.deltaTime; // calculate distance to move
-            transform.localPosition = Vector3.MoveTowards(transform.localPosition, playerCreator.transform.localPosition, lockPlayerChaseStep);
+
+            directionToFace = playerCreator.transform.position - transform.position;
+            transform.LookAt(new Vector3(playerCreator.transform.position.x , .5f , playerCreator.transform.position.z));
+            GetComponent<EnemyPathFaollower>().SetSpeed(lockPlayerChaseSpeed);
+
         }
+        else
+            transform.localEulerAngles = new Vector3(0, -180, 0);
     }
     void RandomXspawn()
     {

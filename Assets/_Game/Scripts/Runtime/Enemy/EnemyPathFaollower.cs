@@ -15,6 +15,7 @@ public class EnemyPathFaollower : MonoBehaviour
     private float _distanceTravelled;
     private bool _canFollow;
 
+    public float Speed => _speed;
     #endregion
 
     #region Unity Methods
@@ -25,7 +26,7 @@ public class EnemyPathFaollower : MonoBehaviour
         _canFollow = true;
 
         GetComponent<Enemy>().OnDeath += DisableFollow ;
-        GameManager.Instance.OnLevelEnd += DisableFollow;
+     
     }
     private void OnDisable()
     {
@@ -43,10 +44,14 @@ public class EnemyPathFaollower : MonoBehaviour
     #region Custom Methods
 
 
-
+    public void SetSpeed(float number)
+    {
+       _speed = number;
+    }
     private void FollowPath()
     {
-        transform.Translate(_moveDirection * Time.deltaTime * _speed);
+        transform.localPosition += transform.forward * Time.deltaTime * _speed;
+       
     }
     void SetRandomSpeed()
     {

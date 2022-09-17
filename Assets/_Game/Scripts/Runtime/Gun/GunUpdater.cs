@@ -18,9 +18,10 @@ public class GunUpdater : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Gun"))
         {
-            UpdateGun();
+            
             count++;
             PlayerPrefs.SetInt("GunNo", count);
+            UpdateGun();
             Destroy(other.gameObject);
            
         }

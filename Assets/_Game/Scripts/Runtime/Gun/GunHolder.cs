@@ -19,7 +19,8 @@ public class GunHolder : MonoBehaviour
         {
             _guns[i].gameObject.SetActive(false);
         }
-       _guns[index].gameObject.SetActive(true);
+        index = PlayerPrefs.GetInt("GunNo", 0);
+        _guns[index].gameObject.SetActive(true);
        _guns[index].gameObject.GetComponent<Gun>().StartShooting();
     }
 }

@@ -63,7 +63,7 @@ public class EnemySpawner : MonoBehaviour
             GameObject _enemyGO = Instantiate(_enemy, Vector3.zero, Quaternion.identity, this.transform);
             enemies.Add(_enemyGO);
             Enemy enemyController = _enemyGO.GetComponent<Enemy>();
-
+            _enemyGO.transform.DOLocalRotate(new Vector3(0, -180, 0), 0);
             enemyController.transform.localPosition = Vector3.zero;
             enemyController.transform.position = new Vector3(playerCreator.gameObject.transform.position.x, .5f
             , playerCreator.gameObject.transform.position.z - distanceFromPlayer);

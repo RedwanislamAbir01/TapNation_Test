@@ -553,7 +553,7 @@ namespace GameAnalyticsSDK
         {
             if(!GameAnalytics._hasInitializeBeenCalled)
             {
-                Debug.LogError("GameAnalytics: REMEMBER THE SDK NEEDS TO BE MANUALLY INITIALIZED NOW");
+               // Debug.LogError("GameAnalytics: REMEMBER THE SDK NEEDS TO BE MANUALLY INITIALIZED NOW");
                 return;
             }
             GA_Progression.NewEvent(progressionStatus, progression01, progression02, progression03, null, false);
