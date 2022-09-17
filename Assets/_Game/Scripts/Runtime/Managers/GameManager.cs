@@ -1,6 +1,6 @@
 using System;
 using _Tools.Helpers;
-
+using GameAnalyticsSDK;
 namespace _Game.Managers
 {
     public class GameManager : Singleton<GameManager>
@@ -19,6 +19,7 @@ namespace _Game.Managers
         public void LevelStart()
         {
             OnLevelStart?.Invoke();
+            GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "World_01", "Stage_01", "Level_Progress");
         }
         public void LevelEnd()
         {
@@ -37,6 +38,7 @@ namespace _Game.Managers
         public void LevelCompleted()
         {
             OnLevelCompleted?.Invoke();
+            GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "World_01", "Stage_01", "Level_End");
         }
 
         #endregion
